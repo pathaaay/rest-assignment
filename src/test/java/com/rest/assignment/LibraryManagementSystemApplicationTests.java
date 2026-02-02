@@ -1,4 +1,4 @@
-package com.lms.library_management_system;
+package com.rest.assignment;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

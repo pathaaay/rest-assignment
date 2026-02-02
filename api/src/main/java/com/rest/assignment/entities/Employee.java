@@ -22,6 +22,7 @@ public class Employee {
     private String department;
     private int salary;
 
+    @Lob
     private String profile_picture_path;
 
     private String email;

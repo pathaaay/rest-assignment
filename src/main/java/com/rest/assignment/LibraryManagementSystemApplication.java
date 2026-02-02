@@ -1,4 +1,4 @@
-package com.lms.library_management_system;
+package com.rest.assignment;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

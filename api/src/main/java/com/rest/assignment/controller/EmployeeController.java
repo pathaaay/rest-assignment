@@ -33,12 +33,10 @@ public class EmployeeController {
     @Value("${file.upload-dir}")
     private String uploadDir;
 
-
     @Autowired
     EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-
 
     @GetMapping()
     public ResponseEntity<List<EmployeeResponseDTO>> getEmployees() {
@@ -88,7 +86,7 @@ public class EmployeeController {
             Path filePath = uploadPath.resolve(fileName);
 
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-            return employeeService.updateEmployeePhoto(employeeId, filePath.toString());
+            return employeeService.updateEmployeePhoto(employeeId, fileName);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());

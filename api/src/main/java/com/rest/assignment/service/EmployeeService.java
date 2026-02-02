@@ -115,7 +115,6 @@ public class EmployeeService {
     }
 
     public ResponseEntity<EmployeeResponseDTO> updateEmployeePhoto(UUID employeeId, String filePath) {
-        System.out.println("filePath : " + filePath);
         Employee updatedEmployee = employeeRepo.findById(employeeId).map(existingEmployee -> {
             existingEmployee.setProfile_picture_path(filePath);
             return employeeRepo.save(existingEmployee);
