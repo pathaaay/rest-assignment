@@ -32,9 +32,7 @@ public class EmployeeRequestDTO {
     @NotBlank(message = "Department is required", groups = {CreateEmployee.class, UpdateEmployee.class})
     private String department;
 
-    @NotBlank(message = "Department is required", groups = {CreateEmployee.class, UpdateEmployeeSalary.class})
+    @NotBlank(message = "Salary is required", groups = {CreateEmployee.class})
     @Min(value = 1000,message = "Minimum salary should be 1000", groups = {CreateEmployee.class, UpdateEmployee.class, UpdateEmployeeSalary.class})
     private int salary;
-
-
 }

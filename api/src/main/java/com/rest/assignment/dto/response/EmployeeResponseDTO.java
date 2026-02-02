@@ -13,4 +13,5 @@ public class EmployeeResponseDTO {
     private String department;
     private int salary;
     private String email;
+    private String profile_picture_path;
 }

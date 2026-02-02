@@ -21,6 +21,9 @@ public class Employee {
     private String name;
     private String department;
     private int salary;
+
+    private String profile_picture_path;
+
     private String email;
     private String password;
 }
