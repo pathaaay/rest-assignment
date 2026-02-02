@@ -1,13 +1,18 @@
 package com.rest.assignment.service;
 
-import com.rest.assignment.ApiResponse;
 import com.rest.assignment.dto.request.EmployeeRequestDTO;
 import com.rest.assignment.dto.response.EmployeeResponseDTO;
 import com.rest.assignment.entities.Employee;
 import com.rest.assignment.mapper.EntityMapper;
 import com.rest.assignment.repository.EmployeeRepo;
+import com.rest.assignment.validation_groups.UpdateEmployee;
+import com.rest.assignment.validation_groups.UpdateEmployeeName;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,51 +26,75 @@ public class EmployeeService {
     @Autowired
     private EntityMapper entityMapper;
 
-    public ApiResponse<List<EmployeeResponseDTO>> getEmployees() {
+    public ResponseEntity<List<EmployeeResponseDTO>> getEmployees() {
         List<Employee> data = employeeRepo.findAll();
-        return ApiResponse.success(entityMapper.toEmployeeDTOList(data), "Employee Get Successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body(entityMapper.toEmployeeDTOList(data));
     }
 
-    public ApiResponse<EmployeeResponseDTO> getEmployeeById(UUID employeeId) {
+    public ResponseEntity<EmployeeResponseDTO> getEmployeeById(UUID employeeId) {
         Optional<Employee> data = employeeRepo.findById(employeeId);
-        return ApiResponse.success(entityMapper.toEmployeeDTO(data.orElse(null)), "Employee Get Successfully");
+
+        if (data.isPresent())
+            return ResponseEntity.ok().body(entityMapper.toEmployeeDTO(data.orElse(null)));
+        else return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
-    public ApiResponse<EmployeeResponseDTO> createEmployee(EmployeeRequestDTO employee) {
+    public ResponseEntity<EmployeeResponseDTO> createEmployee(EmployeeRequestDTO employee) {
         Employee newEmployee = employeeRepo.save(entityMapper.dtoToEmployee(employee));
-        return ApiResponse.success(entityMapper.toEmployeeDTO(newEmployee), "Employee Created successfully",201);
+        return ResponseEntity.status(HttpStatus.CREATED).body(entityMapper.toEmployeeDTO(newEmployee));
     }
 
 
-    public ApiResponse<EmployeeResponseDTO> updateEmployee(EmployeeRequestDTO employee) {
-        Employee updatedEmployee = employeeRepo.findById(employee.getId()).map(existingEmployee -> {
-            existingEmployee.setName(employee.getName());
-            existingEmployee.setEmail(employee.getEmail());
+    public ResponseEntity<EmployeeResponseDTO> updateEmployee(UUID employeeId, EmployeeRequestDTO employee) {
+        Optional<Employee> oldEmployee = employeeRepo.findById(employeeId);
 
-            return employeeRepo.save(existingEmployee);
-        }).orElse(null);
-        return ApiResponse.success(entityMapper.toEmployeeDTO(updatedEmployee), "Employee Get Successfully");
-    }
+        if (oldEmployee.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 
-    public ApiResponse<EmployeeResponseDTO> updateEmployeeName(UUID employeeId, String name) {
         Employee updatedEmployee = employeeRepo.findById(employeeId).map(existingEmployee -> {
-            existingEmployee.setName(name);
+            existingEmployee.setName(employee.getName());
+            existingEmployee.setSalary(employee.getSalary());
+            existingEmployee.setDepartment(employee.getDepartment());
             return employeeRepo.save(existingEmployee);
         }).orElse(null);
-        return ApiResponse.success(entityMapper.toEmployeeDTO(updatedEmployee), "Employee name updated Successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(entityMapper.toEmployeeDTO(updatedEmployee));
     }
 
-    public ApiResponse<EmployeeResponseDTO> updateEmployeeSalary(UUID employeeId, int salary) {
+    public ResponseEntity<EmployeeResponseDTO> updateEmployeeName(UUID employeeId, EmployeeRequestDTO employee) {
+        Optional<Employee> oldEmployee = employeeRepo.findById(employeeId);
+        if (oldEmployee.isEmpty()) ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        Employee updatedEmployee = employeeRepo.findById(employeeId).map(existingEmployee -> {
+            existingEmployee.setName(employee.getName());
+            return employeeRepo.save(existingEmployee);
+        }).orElse(null);
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(entityMapper.toEmployeeDTO(updatedEmployee));
+    }
+
+    public ResponseEntity<EmployeeResponseDTO> updateEmployeeSalary(UUID employeeId, int salary) {
+        if (salary <= 0) throw new IllegalArgumentException("Salary must be greater than 0");
+
+        Optional<Employee> oldEmployee = employeeRepo.findById(employeeId);
+
+        if (oldEmployee.isEmpty()) ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+
+
         Employee updatedEmployee = employeeRepo.findById(employeeId).map(existingEmployee -> {
             existingEmployee.setSalary(salary);
             return employeeRepo.save(existingEmployee);
         }).orElse(null);
-        return ApiResponse.success(entityMapper.toEmployeeDTO(updatedEmployee), "Employee salary updated Successfully");
+
+        return ResponseEntity.status(HttpStatus.OK).body(entityMapper.toEmployeeDTO(updatedEmployee));
     }
 
-    public ApiResponse<EmployeeResponseDTO> deleteEmployeeName(UUID employeeId) {
+    public ResponseEntity<EmployeeResponseDTO> deleteEmployeeById(UUID employeeId) {
+
+        Optional<Employee> existingEmployee = employeeRepo.findById(employeeId);
+
+        if (existingEmployee.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+
         employeeRepo.deleteById(employeeId);
-        return ApiResponse.success(entityMapper.toEmployeeDTO(null), "Employee Deleted Successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(entityMapper.toEmployeeDTO(null));
     }
 
 }

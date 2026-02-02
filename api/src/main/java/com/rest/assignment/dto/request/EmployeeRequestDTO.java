@@ -1,6 +1,11 @@
 package com.rest.assignment.dto.request;
 
+import com.rest.assignment.validation_groups.CreateEmployee;
+import com.rest.assignment.validation_groups.UpdateEmployee;
+import com.rest.assignment.validation_groups.UpdateEmployeeName;
+import com.rest.assignment.validation_groups.UpdateEmployeeSalary;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -13,20 +18,23 @@ import java.util.UUID;
 public class EmployeeRequestDTO {
     private UUID id;
 
-    @NotBlank(message = "Name is required")
-    private String name;
-
-    @Email(message = "Invalid email")
-    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email", groups = {CreateEmployee.class})
+    @NotBlank(message = "Email is required", groups = {CreateEmployee.class})
     private String email;
 
-    @NotBlank(message = "Department is required")
+    @NotBlank(message = "Password is required", groups = {CreateEmployee.class})
+    @Size(min = 8, message = "Password must be at least 8 characters long", groups = {CreateEmployee.class})
+    private String password;
+
+    @NotBlank(message = "Name is required", groups = {CreateEmployee.class, UpdateEmployee.class, UpdateEmployeeName.class})
+    private String name;
+
+    @NotBlank(message = "Department is required", groups = {CreateEmployee.class, UpdateEmployee.class})
     private String department;
 
-    @NotBlank(message = "Salary is required")
+    @NotBlank(message = "Department is required", groups = {CreateEmployee.class, UpdateEmployeeSalary.class})
+    @Min(value = 1000,message = "Minimum salary should be 1000", groups = {CreateEmployee.class, UpdateEmployee.class, UpdateEmployeeSalary.class})
     private int salary;
 
-    @Size(min = 8, message = "Password must be at least 8 characters long")
-    private String password;
 
 }
