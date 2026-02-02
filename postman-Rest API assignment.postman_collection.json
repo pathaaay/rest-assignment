@@ -1,0 +1,516 @@
+{
+  "info": {
+    "_postman_id": "fd1ccd54-a6ae-48d5-b07f-e8a257ea78fd",
+    "name": "Rest API assignment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51849871",
+    "_collection_link": "https://go.postman.co/collection/51849871-fd1ccd54-a6ae-48d5-b07f-e8a257ea78fd?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "create employee",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\":\"Test Employee 2\",\r\n    \"department\":\"Sales\",\r\n    \"salary\": 25000,\r\n    \"email\": \"test@example.com\",\r\n    \"password\": \"0987654321\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_ur}}/employees",
+          "host": [
+            "{{base_ur}}"
+          ],
+          "path": [
+            "employees"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "create employee",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Test Employee 2\",\r\n    \"department\":\"Sales\",\r\n    \"salary\": 25000,\r\n    \"email\": \"test@example.com\",\r\n    \"password\": \"0987654321\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_ur}}/employees",
+              "host": [
+                "{{base_ur}}"
+              ],
+              "path": [
+                "employees"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 12:24:48 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": \"5716f292-7d14-41bb-857f-f658f037f2c2\",\n    \"name\": \"Test Employee 2\",\n    \"department\": \"Sales\",\n    \"salary\": 25000,\n    \"email\": \"test@example.com\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "get all employees",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_ur}}/employees",
+          "host": [
+            "{{base_ur}}"
+          ],
+          "path": [
+            "employees"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "get all employees",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_ur}}/employees",
+              "host": [
+                "{{base_ur}}"
+              ],
+              "path": [
+                "employees"
+              ]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 12:24:55 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": \"f5f8f3b0-0278-4a5b-a734-d34f9eec1482\",\n        \"name\": \"Aayush Pathak\",\n        \"department\": \"IT\",\n        \"salary\": 15000,\n        \"email\": \"aayush@example.com\"\n    },\n    {\n        \"id\": \"5716f292-7d14-41bb-857f-f658f037f2c2\",\n        \"name\": \"Test Employee 2\",\n        \"department\": \"Sales\",\n        \"salary\": 25000,\n        \"email\": \"test@example.com\"\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "get employee by id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_ur}}/employees/f5f8f3b0-0278-4a5b-a734-d34f9eec1482",
+          "host": [
+            "{{base_ur}}"
+          ],
+          "path": [
+            "employees",
+            "f5f8f3b0-0278-4a5b-a734-d34f9eec1482"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "get employee by id",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_ur}}/employees/f5f8f3b0-0278-4a5b-a734-d34f9eec1482",
+              "host": [
+                "{{base_ur}}"
+              ],
+              "path": [
+                "employees",
+                "f5f8f3b0-0278-4a5b-a734-d34f9eec1482"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 12:25:36 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": \"f5f8f3b0-0278-4a5b-a734-d34f9eec1482\",\n    \"name\": \"Aayush Pathak\",\n    \"department\": \"IT\",\n    \"salary\": 15000,\n    \"email\": \"aayush@example.com\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "update employee",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\":\"ayush\",\r\n    \"department\":\"IT\",\r\n    \"salary\":9000\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_ur}}/employees/f5f8f3b0-0278-4a5b-a734-d34f9eec1482",
+          "host": [
+            "{{base_ur}}"
+          ],
+          "path": [
+            "employees",
+            "f5f8f3b0-0278-4a5b-a734-d34f9eec1482"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "update employee",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"ayush\",\r\n    \"department\":\"IT\",\r\n    \"salary\":9000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_ur}}/employees/f5f8f3b0-0278-4a5b-a734-d34f9eec1482",
+              "host": [
+                "{{base_ur}}"
+              ],
+              "path": [
+                "employees",
+                "f5f8f3b0-0278-4a5b-a734-d34f9eec1482"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 12:42:58 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": \"f5f8f3b0-0278-4a5b-a734-d34f9eec1482\",\n    \"name\": \"ayush\",\n    \"department\": \"IT\",\n    \"salary\": 9000,\n    \"email\": \"ayush@example.com\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "update employee name",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\":\"Aayush Pathak\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_ur}}/employees/f5f8f3b0-0278-4a5b-a734-d34f9eec1482/update-name",
+          "host": [
+            "{{base_ur}}"
+          ],
+          "path": [
+            "employees",
+            "f5f8f3b0-0278-4a5b-a734-d34f9eec1482",
+            "update-name"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "update employee name",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Aayush Pathak\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_ur}}/employees/f5f8f3b0-0278-4a5b-a734-d34f9eec1482/update-name",
+              "host": [
+                "{{base_ur}}"
+              ],
+              "path": [
+                "employees",
+                "f5f8f3b0-0278-4a5b-a734-d34f9eec1482",
+                "update-name"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 14:28:07 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": \"f5f8f3b0-0278-4a5b-a734-d34f9eec1482\",\n    \"name\": \"Aayush Pathak\",\n    \"department\": \"IT\",\n    \"salary\": 9000,\n    \"email\": \"ayush@example.com\",\n    \"profile_picture_path\": null\n}"
+        }
+      ]
+    },
+    {
+      "name": "update employee salary",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"salary\":35000\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_ur}}/employees/f5f8f3b0-0278-4a5b-a734-d34f9eec1482/update-salary",
+          "host": [
+            "{{base_ur}}"
+          ],
+          "path": [
+            "employees",
+            "f5f8f3b0-0278-4a5b-a734-d34f9eec1482",
+            "update-salary"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "update employee name",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\":\"Aayush Pathak\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_ur}}/employees/f5f8f3b0-0278-4a5b-a734-d34f9eec1482/update-name",
+              "host": [
+                "{{base_ur}}"
+              ],
+              "path": [
+                "employees",
+                "f5f8f3b0-0278-4a5b-a734-d34f9eec1482",
+                "update-name"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 14:28:07 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": \"f5f8f3b0-0278-4a5b-a734-d34f9eec1482\",\n    \"name\": \"Aayush Pathak\",\n    \"department\": \"IT\",\n    \"salary\": 9000,\n    \"email\": \"ayush@example.com\",\n    \"profile_picture_path\": null\n}"
+        }
+      ]
+    },
+    {
+      "name": "delete an employee",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_ur}}/employees/b1b3c134-87a1-42e5-9682-676b9492984b",
+          "host": [
+            "{{base_ur}}"
+          ],
+          "path": [
+            "employees",
+            "b1b3c134-87a1-42e5-9682-676b9492984b"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "add employee profile picture",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "uuid": "271eeaf0-46fd-4d3a-bb4f-0a104377b126",
+              "src": "/C:/Users/pathaaay/Pictures/Screenshots/Screenshot 2026-01-19 182613.png"
+            },
+            {
+              "key": "",
+              "value": "",
+              "type": "text",
+              "uuid": "4d85ca12-59e0-4e3e-b279-b94bbb832174",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_ur}}/employees/b1b3c134-87a1-42e5-9682-676b9492984b/profile-picture",
+          "host": [
+            "{{base_ur}}"
+          ],
+          "path": [
+            "employees",
+            "b1b3c134-87a1-42e5-9682-676b9492984b",
+            "profile-picture"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
