@@ -6,6 +6,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,8 @@ import java.util.UUID;
 @Component
 @RequiredArgsConstructor
 public class JWTAuthFilter extends OncePerRequestFilter {
-    public final JwtService jwtService;
+    @Autowired
+    private JwtService jwtService;
 
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -37,8 +39,10 @@ public class JWTAuthFilter extends OncePerRequestFilter {
                 }
             }
         }
-
-        if (token != null) {
+        if (token == null) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                    "Please pass valid jwt token.");
+        }  else {
             UUID userId = jwtService.extractUserId(token);
 
             if (userId != null) {
